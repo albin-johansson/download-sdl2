@@ -1,0 +1,45 @@
+name: "Download SDL2"
+description: "Download SDL2 for Windows"
+
+inputs:
+  version:
+    description: "The version of SDL2 that will be downloaded"
+    required: true
+    default: 2.0.14
+
+  sources_destination:
+    description: "Where the SDL2 sources will be saved"
+    required: true
+
+  binaries_destination:
+    description: "Where the SDL2 runtime binaries will be saved"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Download sources
+      uses: suisei-cn/actions-download-file@v1
+      id: download_sources
+      with:
+        url: "https://libsdl.org/release/SDL2-devel-${{inputs.version}}-VC.zip"
+        target: ${{inputs.sources_destination}}
+
+    - name: Unzip sources
+      run: 7z x -y SDL2-devel-${{inputs.version}}-VC.zip
+
+    - name: Remove sources archive
+      run: del SDL2-devel-${{inputs.version}}-VC.zip
+
+    - name: Download runtime binaries
+      uses: suisei-cn/actions-download-file@v1
+      id: download_runtime_binaries
+      with:
+        url: "https://www.libsdl.org/release/SDL2-${{inputs.version}}-win32-x64.zip"
+        target: ${{inputs.binaries_destination}}
+
+    - name: Unzip runtime binaries archive
+      run: 7z e -y SDL2-${{inputs.version}}-win32-x64.zip -o${{inputs.binaries_destination}}
+
+    - name: Remove runtime binaries archive
+      run: del SDL2-${{inputs.version}}-win32-x64.zip
