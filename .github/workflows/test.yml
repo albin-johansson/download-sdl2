@@ -1,0 +1,15 @@
+name: Test
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Download SDL2
+        uses: albin-johansson/download-sdl2@v1
+        with:
+          version: 2.0.14
+          sources_destination: ./SDL2
+          binaries_destination: ./bin
