@@ -1,5 +1,5 @@
 name: "Download SDL2"
-description: "Download SDL2 for Windows"
+description: "Download SDL2 sources and binaries for Windows, using MSVC."
 
 branding:
   icon: "download"
