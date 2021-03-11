@@ -11,7 +11,7 @@ jobs:
       - name: Make directories
         run: |
           mkdir SDL2
-          mkdir bind
+          mkdir bin
         shell: cmd
 
       - name: Download SDL2
