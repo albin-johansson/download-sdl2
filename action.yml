@@ -1,6 +1,10 @@
 name: "Download SDL2"
 description: "Download SDL2 for Windows"
 
+branding:
+  icon: "download"
+  color: "green"
+
 inputs:
   version:
     description: "The version of SDL2 that will be downloaded"
