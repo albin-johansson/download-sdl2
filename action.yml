@@ -22,6 +22,10 @@ runs:
       run: Invoke-WebRequest -Uri "https://libsdl.org/release/SDL2-devel-${{inputs.version}}-VC.zip" -OutFile ${{inputs.sources_destination}}/SDL2-devel-${{inputs.version}}-VC.zip
       shell: powershell
 
+    - name: Print info
+      run: dir
+      shell: cmd
+
     - name: Unzip sources
       run: 7z x -y SDL2-devel-${{inputs.version}}-VC.zip
       shell: cmd
