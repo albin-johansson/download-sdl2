@@ -36,6 +36,6 @@ runs:
     - name: Unzip runtime binaries archive
       run: |
         cd ${{inputs.binaries_destination}}
-        7z e -y SDL2-${{inputs.version}}-win32-x64.zip -o${{inputs.binaries_destination}}
+        7z x -y SDL2-${{inputs.version}}-win32-x64.zip
         del SDL2-${{inputs.version}}-win32-x64.zip
       shell: cmd
