@@ -9,14 +9,11 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Make directories
-        run: |
-          mkdir SDL2
-          mkdir bin
         shell: cmd
+        run: mkdir bin
 
       - name: Download SDL2
-        uses: albin-johansson/download-sdl2@v0.1-alpha.4
+        uses: albin-johansson/download-sdl2@latest
         with:
-          version: 2.0.14
-          sources_destination: SDL2
+          sources_destination: .
           binaries_destination: bin
