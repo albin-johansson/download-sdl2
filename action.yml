@@ -8,8 +8,8 @@ branding:
 inputs:
   version:
     description: "The version of SDL2 that will be downloaded"
-    required: true
-    default: 2.0.14
+    required: false
+    default: 2.0.16
 
   sources_destination:
     description: "Where the SDL2 sources will be saved"
@@ -23,23 +23,25 @@ runs:
   using: "composite"
   steps:
     - name: Download sources
-      run: Invoke-WebRequest -Uri "https://libsdl.org/release/SDL2-devel-${{inputs.version}}-VC.zip" -OutFile ${{inputs.sources_destination}}/SDL2-devel-${{inputs.version}}-VC.zip
       shell: powershell
+      run: Invoke-WebRequest -Uri "https://libsdl.org/release/SDL2-devel-${{inputs.version}}-VC.zip" `
+                             -OutFile ${{inputs.sources_destination}}/SDL2-devel-${{inputs.version}}-VC.zip
 
     - name: Unzip sources
+      shell: cmd
       run: |
         cd ${{inputs.sources_destination}}
         7z x -y SDL2-devel-${{inputs.version}}-VC.zip
         del SDL2-devel-${{inputs.version}}-VC.zip
-      shell: cmd
 
     - name: Download runtime binaries
-      run: Invoke-WebRequest -Uri "https://www.libsdl.org/release/SDL2-${{inputs.version}}-win32-x64.zip" -OutFile ${{inputs.binaries_destination}}/SDL2-${{inputs.version}}-win32-x64.zip
       shell: powershell
+      run: Invoke-WebRequest -Uri "https://www.libsdl.org/release/SDL2-${{inputs.version}}-win32-x64.zip" `
+                             -OutFile ${{inputs.binaries_destination}}/SDL2-${{inputs.version}}-win32-x64.zip
 
     - name: Unzip runtime binaries archive
+      shell: cmd
       run: |
         cd ${{inputs.binaries_destination}}
         7z x -y SDL2-${{inputs.version}}-win32-x64.zip
         del SDL2-${{inputs.version}}-win32-x64.zip
-      shell: cmd
